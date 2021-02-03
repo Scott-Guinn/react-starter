@@ -19,13 +19,29 @@ class App extends React.Component {
       currentSearch: ''
     }
 
+    this.handleWatchedToggle = this.handleWatchedToggle.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
   }
 
+    handleWatchedToggle(index){
+      console.log('handleWatchedToggle has been called!');
+      console.log('index: ', index);
+      var movies = this.state.movies.slice();
+      console.log('movies: ', movies)
+      var movieToChange = movies[index];
+      console.log('movieToChange: ', movieToChange);
+      movieToChange.checked = !movieToChange.checked;
+
+      this.setState({
+         movies: movies
+      })
+    }
+
     handleAddClick(value){
       var newMovie = {
-        title: value
+        title: value,
+        checked: false
       }
       this.setState({
         movies: [newMovie, ...this.state.movies]
@@ -55,7 +71,7 @@ class App extends React.Component {
       <Search handleSearchClick={this.handleSearchClick}/>
 
       <MovieList movies={this.state.movies}
-                 currentSearch={this.state.currentSearch} />
+                 handleWatchedToggle={this.handleWatchedToggle} />
     </div>
   )}
 }
