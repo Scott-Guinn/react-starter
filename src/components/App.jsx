@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './MovieList.jsx'
 import Search from './Search.jsx'
+import AddMovie from './AddMovie.jsx'
 import _ from 'lodash'
 
 class App extends React.Component {
@@ -9,40 +10,48 @@ class App extends React.Component {
 
     this.state = {
       movies: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
+        // {title: 'Mean Girls'},
+        // {title: 'Hackers'},
+        // {title: 'The Grey'},
+        // {title: 'Sunshine'},
+        // {title: 'Ex Machina'},
       ],
       currentSearch: ''
     }
 
+    this.handleAddClick = this.handleAddClick.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
   }
 
+    handleAddClick(value){
+      var newMovie = {
+        title: value
+      }
+      this.setState({
+        movies: [newMovie, ...this.state.movies]
+      })
+    }
+
     handleSearchClick(value){
-      console.log('value: ', value);
-      console.log('this.state.movies: ', this.state.movies)
       var relevantMovies = _.filter(this.state.movies, (movie) => {
         return movie.title.toLowerCase().includes(value.toLowerCase());
       })
-      console.log('relevantMovies: ', relevantMovies);
       if (relevantMovies.length === 0) {
-        relevantMovies = [{title: 'No movies found'}]
+        alert('No movies found by that name');
+        relevantMovies = this.state.movies;
       }
     this.setState({
       currentSearch: value,
       movies: relevantMovies
     }, () => {
-      console.log('Click. CurrentSearch: ', this.state.currentSearch);
-      console.log('movies: ', this.state.movies);
     })
   }
 
   render(){
     return(
     <div>
+      <AddMovie handleAddClick={this.handleAddClick}/>
+
       <Search handleSearchClick={this.handleSearchClick}/>
 
       <MovieList movies={this.state.movies}
