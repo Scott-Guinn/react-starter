@@ -65,10 +65,7 @@ class App extends React.Component {
             return !movie.checked});
         } else {
           // display no movies(?)
-          moviesToDisplay = [{
-              title: 'No Movies To Display',
-              checked: false
-            }]
+          moviesToDisplay = []
         }
       // if something has changed, call setState (this conditional is necessary to avoid infinite looping!)
       if (previousStates.watched !== this.state.watched || previousStates.toWatch !== this.state.toWatch){

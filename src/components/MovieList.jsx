@@ -18,14 +18,14 @@ var MovieList = ({movies, handleWatchedToggle, filterResults, watched, toWatch})
              onChange={(e) => filterResults(event)}  />
     </div>
 
-    {movies.map((movie, i) => (
+    {movies.length > 0 ? movies.map((movie, i) => (
       <MovieListItem className='item'
                      title={movie.title}
                      key={i}
                      handleWatchedToggle={handleWatchedToggle}
                      checked={movie.checked}
                      details={movie.details}/>
-    ))}
+    )) : <h2>No Movies To Display</h2>}
   </div>
 )
 
