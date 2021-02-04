@@ -19,11 +19,12 @@ var MovieList = ({movies, handleWatchedToggle, filterResults, watched, toWatch})
     </div>
 
     {movies.map((movie, i) => (
-      <MovieListItem title={movie.title}
+      <MovieListItem className='item'
+                     title={movie.title}
                      key={i}
-                     index={i}
                      handleWatchedToggle={handleWatchedToggle}
-                     checked={movie.checked}/>
+                     checked={movie.checked}
+                     details={movie.details}/>
     ))}
   </div>
 )

@@ -9,6 +9,10 @@ class AddMovie extends React.Component {
     }
   }
 
+  handleChange(event) {
+    this.setState({newMovie: event.target.value})
+  }
+
   render(){
     return (
     <div>
@@ -17,7 +21,7 @@ class AddMovie extends React.Component {
            ref="add"
            value={this.state.newMovie}
            type="text"
-           onChange={() => this.setState({newMovie: this.value})}
+           onChange={(e) => this.handleChange(e)}
       >
       </input>
        <button className="add" onClick={() => {

@@ -14,14 +14,8 @@ class App extends React.Component {
   // }
 
     this.state = {
-      allMovies: [
-        // {title: 'Ocean\'s Eleven', checked: false},
-        // {title: 'Pirates of the Caribbean: The Black Pearl', checked: true}
-                ],
-      movies: [
-        // {title: 'Ocean\'s Eleven', checked: false},
-        // {title: 'Pirates of the Caribbean: The Black Pearl', checked: true}
-    ],
+      allMovies: [],
+      movies: [],
       currentSearch: '',
       watched: true,
       toWatch: true,
@@ -31,6 +25,27 @@ class App extends React.Component {
     this.handleWatchedToggle = this.handleWatchedToggle.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
+  }
+
+  componentDidMount() {
+    var allMovies = [
+                    {title: 'Ocean\'s Eleven',
+                    checked: false,
+                    details: {year: 2003,
+                              runtime: '1:05',
+                              meta: 8.2,
+                              imdb: 8.9}},
+
+                    {title: 'Pirates of the Caribbean: The Black Pearl', checked: true,
+                    details: {year: 2003,
+                              runtime: '1:09',
+                              meta: 8.7,
+                              imdb: 9.5}}
+                    ]
+    this.setState({
+      allMovies: allMovies,
+      movies: allMovies
+    });
   }
 
     componentDidUpdate(previousProps, previousStates){
@@ -77,7 +92,6 @@ class App extends React.Component {
 
     handleWatchedToggle(title){
       var allMovies = this.state.allMovies.slice();
-      console.log('here are all your movies:', allMovies)
       var movieToChange = _.find(allMovies, (movie) => {return movie.title === title});
       movieToChange.checked = !movieToChange.checked;
 
