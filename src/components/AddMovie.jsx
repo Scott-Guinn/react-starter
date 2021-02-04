@@ -3,6 +3,10 @@ import React from 'react';
 class AddMovie extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      newMovie: ''
+    }
   }
 
   render(){
@@ -11,9 +15,15 @@ class AddMovie extends React.Component {
       <input className="add"
            placeholder="Add Movie"
            ref="add"
+           value={this.state.newMovie}
+           type="text"
+           onChange={() => this.setState({newMovie: this.value})}
       >
       </input>
-       <button className="add" onClick={() => this.props.handleAddClick(this.refs.add.value)}>Add</button>
+       <button className="add" onClick={() => {
+                this.props.handleAddClick(this.refs.add.value);
+                this.setState({newMovie: ''});
+                }}>Add</button>
     </div>
     )
   }

@@ -2,8 +2,22 @@ import React from 'react';
 import MovieListItem from './MovieListItem.jsx'
 import _ from 'lodash'
 
-var MovieList = ({movies, handleWatchedToggle}) => (
+var MovieList = ({movies, handleWatchedToggle, filterResults, watched, toWatch}) => (
   <div className="list">
+    <div className="btn-group">
+      <label htmlFor="watchedToggle">Watched</label>
+      <input type="checkbox"
+             id="watchedToggle"
+             checked={watched ? 'checked' : ''}
+             onChange={(e) => filterResults(event)}  />
+
+      <label htmlFor="toWatchToggle">To Watch</label>
+      <input type="checkbox"
+             id="toWatchToggle"
+             checked={toWatch ? 'checked' : ''}
+             onChange={(e) => filterResults(event)}  />
+    </div>
+
     {movies.map((movie, i) => (
       <MovieListItem title={movie.title}
                      key={i}
